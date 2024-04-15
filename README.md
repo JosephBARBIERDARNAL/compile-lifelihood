@@ -7,6 +7,7 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 ## Directory
 
 - `compilation`: source and compiled files
+- `data`: input data and custom settings
 - `R`: R code that uses the compiled files
 - `sanbox`: where to test things
 
