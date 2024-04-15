@@ -1,7 +1,7 @@
 
 rm(list = ls())
-infile = "100%mort_Pierrick211genoparinteraction.txt"
-customfile = "custom.txt"
+infile = "../data/100%mort_Pierrick211genoparinteraction.txt"
+customfile = "../data/custom.txt"
 GbyG = 0
 MCMC = 0
 interval = 25
@@ -20,22 +20,18 @@ Tf = 1
 climbrate = 1
 precision = 0.001
 
-# Construct the full path to the input files
-infile <- paste(getwd(), infile, sep = "/")
-customfile <- paste(getwd(), customfile, sep = "/")
-
-# Concatenate all arguments into a single string
+# concatenate all arguments into a single string
 arg_string <- paste(infile, customfile, GbyG, MCMC, interval, SEcal, 
                     saveprobevent, fitness, r, seed1, seed2, seed3, 
                     seed4, ntr, nst, To, Tf, climbrate, precision, sep = " ")
 
-# Print the command arguments for debugging
-print(arg_string)
-
-# Define the path to the executable
-app_path <- "../Lifelihood/src/compilation/project1.app/Contents/MacOS/project1"
+# define the path to the executable
+app_path <- "compilation/project1.app/Contents/MacOS/project1"
 command <- paste("open", app_path, "--args", arg_string)
 
-# Run the executable with the constructed arguments string
-output = system(command, intern = TRUE, wait = TRUE)
-print(output)
+# run the command
+system(
+    command,
+    intern = TRUE, # capture the output
+    wait = FALSE  # don't wait for the command to finish
+)

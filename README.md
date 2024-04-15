@@ -1,6 +1,8 @@
-# compile-lifelihood
+<br>
 
 Documentation of the process of compiling the Lifelihood project on macOS.
+
+<br>
 
 ## Directory
 
@@ -13,9 +15,9 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 
 
 
-# History
+## History
 
-## April 15
+### April 15
 
 - ✅ Successfully compiled a simple print hello world program using Lazarus. It was compiled with `fpc sanbox.pas` and executed with `./sandbox`. The output was `Hello, World!`. The code is as follows:
 ```pascal
@@ -28,7 +30,7 @@ begin
 end. 
 ```
 
-<br><hr><br>
+<br>
 
 - ✅ Created a simple project in Lazarus and compiled a simple program that prints "Hello, World!" to the console. The code is as follows:
 ```pascal
@@ -42,7 +44,7 @@ end.
 ```
 Once compiled, I ran the program with `./project1` and it worked as expected.
 
-<br><hr><br>
+<br>
 
 - ✅ Create a project in Lazarus and tried to compile the whole `Lifelihood` project. The project is not compiling because of the following error:
 ```
@@ -80,16 +82,16 @@ So I change `procedure roughgarden(var a,b:integer)` to `procedure roughgarden(a
 - Tried to run the project with input data and see if it works.
 
 
-<br><hr><br>
+<br>
 
 
-## April 8
+### April 8
 
 <br>
 
 - 👎 Tried to use the [wine](https://www.winehq.org/) software for running `.exe` files directly on macOS, but does not seem to be solution to the problem. We rather need a compiler from source code directly.
 
-<br><hr><br>
+<br>
 
 - ✅ Followed tutorial from [this page](https://wiki.lazarus.freepascal.org/Installing_Lazarus_on_macOS) that explains how to install Lazarus on macOS (using [this page](https://sourceforge.net/projects/lazarus/)). Lazarus is a free cross-platform IDE which provides a Delphi-like development experience for Pascal. Main steps:
 ```
@@ -104,6 +106,6 @@ So I change `procedure roughgarden(var a,b:integer)` to `procedure roughgarden(a
 - Configure LLDB - the Apple supplied (and signed) debugger from within the Lazarus IDE.
 ```
 
-<br><hr><br>
+<br>
 
 - TODO next session: try to compile some code with Lazarus and see if it works.
