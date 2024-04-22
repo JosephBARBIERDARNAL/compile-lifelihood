@@ -32,6 +32,6 @@ command <- paste("open", app_path, "--args", arg_string)
 # run the command
 system(
     command,
-    intern = TRUE, # capture the output
+    intern = FALSE, # capture the output
     wait = FALSE  # don't wait for the command to finish
 )
