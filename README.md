@@ -35,6 +35,7 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 
 - So I post a question on the Lazarus forum to see if someone can help me with this issue at [this adress](https://forum.lazarus.freepascal.org/index.php?topic=67059.msg515282#msg515282)
    - someone redirected me to [this page](https://forum.lazarus.freepascal.org/index.php/topic,64812.0.html) that is a discussion about the exact same issue (at least in terms of error messages).
+   - the problem seems to be that Xcode command line tools above 15 on Sonoma breaks the compilation process.
    - one easy solution seemed to just downgrade Xcode to a version before 15 since the bug seems to be related to older version.
 
 - I removed Xcode from my mac, went to Apple developer website to download the last Xcode version before 15 (14.3.1). I installed it but unfortunately MacOS Sonoma (my version) requires a more recent Xcode version. So I reinstalled the last Xcode version (15.3) and I will try to find another solution.
