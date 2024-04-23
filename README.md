@@ -18,6 +18,10 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 
 ## History
 
+### April 23
+
+- Project seems to not be compiled correctly because executable files don't do much, so I re start from a clean base. 
+
 ### April 15
 
 - ✅ Successfully compiled a simple print hello world program using Lazarus. It was compiled with `fpc sanbox.pas` and executed with `./sandbox`. The output was `Hello, World!`. The code is as follows:
