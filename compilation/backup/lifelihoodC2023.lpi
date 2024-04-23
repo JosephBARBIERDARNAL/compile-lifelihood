@@ -27,6 +27,7 @@
       <Unit>
         <Filename Value="lifelihoodc2023.lpr"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="lifelihoodC2023"/>
       </Unit>
       <Unit>
         <Filename Value="Unit2.pas"/>

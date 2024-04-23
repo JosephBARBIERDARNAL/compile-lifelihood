@@ -37,7 +37,9 @@ Documentation of the process of compiling the Lifelihood project on macOS.
    - someone redirected me to [this page](https://forum.lazarus.freepascal.org/index.php/topic,64812.0.html) that is a discussion about the exact same issue (at least in terms of error messages).
    - one easy solution seemed to just downgrade Xcode to a version before 15 since the bug seems to be related to older version.
 
-- I removed Xcode from my mac, when Apple developer website to download the last Xcode version before 15 (14.3.1). I installed it but unfortunately MacOS Sonoma (my version) requires of more recent Xcode version. So I reinstalled the last Xcode version (15.3) and I will try to find another solution.
+- I removed Xcode from my mac, went to Apple developer website to download the last Xcode version before 15 (14.3.1). I installed it but unfortunately MacOS Sonoma (my version) requires a more recent Xcode version. So I reinstalled the last Xcode version (15.3) and I will try to find another solution.
+
+- Since the problem seems related to the LLBD debugger, I tried to use GDB, but `brew install gdb` tells me that GDB does not work on M1 macs (which is also my case).
 
 
 ### April 15

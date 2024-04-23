@@ -5,6 +5,7 @@ x86_64
 -macosx_version_min
 10.8.0
 -L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/
+-L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/lib/darwin/
 -L/Users/josephbarbier/.lazarus/lib/units/x86_64-darwin/cocoa/
 -L/Users/josephbarbier/.lazarus/lib/LCLBase/units/x86_64-darwin/
 -L/Users/josephbarbier/.lazarus/lib/freetypelaz/lib/x86_64-darwin/
