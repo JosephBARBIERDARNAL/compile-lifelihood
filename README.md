@@ -21,6 +21,24 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 ### April 23
 
 - Project seems to not be compiled correctly because executable files don't do much, so I re start from a clean base. 
+   - put 7 source files in a directory
+   - create a new project (Application) in Lazarus
+   - add the 7 source files to the project
+   - convert the Delphi project to a Lazarus project (see [this page](https://forum.lazarus.freepascal.org/index.php?topic=36933.0)). It seems that the project is now a Lazarus project (`.dpr` file disappeared and `.lpi` and `.lpr` file appeared (as well as others)).
+
+- Try to compile the project. Multiple errors are raised:
+   - `Error: .section __DATA, __datacoal_nt, coalesced`, but apparently those are just warnings that Lazarus flags as errors (see [this page](https://forum.lazarus.freepascal.org/index.php?topic=65422.0) and [this page](https://wiki.lazarus.freepascal.org/Mac_Installation_FAQ)).
+   - `Error: linker: Undefined symbols for architecture x86_64:`
+   - `Error: linker: "WSRegisterBevel", referenced from:`
+   - `Error: ld: symbol(s) not found for architecture x86_64`
+   - and finally: `Error: Error while linking`
+
+- So I post a question on the Lazarus forum to see if someone can help me with this issue at [this adress](https://forum.lazarus.freepascal.org/index.php?topic=67059.msg515282#msg515282)
+   - someone redirected me to [this page](https://forum.lazarus.freepascal.org/index.php/topic,64812.0.html) that is a discussion about the exact same issue (at least in terms of error messages).
+   - one easy solution seemed to just downgrade Xcode to a version before 15 since the bug seems to be related to older version.
+
+- I removed Xcode from my mac, when Apple developer website to download the last Xcode version before 15 (14.3.1). I installed it but unfortunately MacOS Sonoma (my version) requires of more recent Xcode version. So I reinstalled the last Xcode version (15.3) and I will try to find another solution.
+
 
 ### April 15
 
