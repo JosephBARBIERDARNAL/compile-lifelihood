@@ -1,7 +1,5 @@
 program lifelihoodC2023;
 
-{$MODE Delphi}
-
 {$APPTYPE CONSOLE}
 
 uses
@@ -19,25 +17,25 @@ begin
 {--BLOC PRINCIPAL-------------------------------------------------------------------------------------------------}
 
 TRY
-  //lecture des parametres entrÃ©e
+  //lecture des parametres entrée
   assignfile(input,'');
   reset(input);
   read(input,lect);
   list := TStringList.Create;
   list.Delimiter :=' ';
-  list.DelimitedText:=lect;                //ca permet de lire la ligne d'input console et d'en faire une liste de string nommÃ©e ici list
+  list.DelimitedText:=lect;                //ca permet de lire la ligne d'input console et d'en faire une liste de string nommée ici list
 
   //infile
   nomf1:=list[0];
   writeln(nomf1);
-  assignfile(f1,nomf1);     // f1 declarÃ© ds unit2
+  assignfile(f1,nomf1);     // f1 declaré ds unit2
   readata;
   fitness_repar:=StrToInt(list[7]);
   r:=StrToFloat(list[8]);
 
   //customfile
   nomfc:=list[1];
-  assignfile(fc,nomfc);     // fc declarÃ© ds unit2
+  assignfile(fc,nomfc);     // fc declaré ds unit2
   readcustom(ll_d);         // = decrireparam code precedent
   //outfile
   Try

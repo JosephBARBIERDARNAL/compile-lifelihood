@@ -1,7 +1,5 @@
 UNIT mathromb;
 
-{$MODE Delphi}
-
 { ******************************************
   ****   Scientific Subroutine Library  ****
   ****         for Turbo Pascal         ****
