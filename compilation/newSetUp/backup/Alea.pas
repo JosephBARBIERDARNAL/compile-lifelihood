@@ -1,8 +1,5 @@
 {$N+}
-unit Alea;
-
-{$MODE Delphi}
-
+unit alea;
 interface
 
 procedure mars;
