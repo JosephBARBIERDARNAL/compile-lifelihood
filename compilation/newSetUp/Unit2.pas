@@ -1,5 +1,5 @@
-(* version daphnie ou ds les donnÈes la premiere ponte et la maturitÈ sont confondues;
-ce qui fait qu'on ajoute une valeur de taille de ponte (tp) ‡ la maturitÈ et ca vaut zero pour ceux qui ont pas pondu/maturÈ
+(* version daphnie ou ds les donn√©es la premiere ponte et la maturit√© sont confondues;
+ce qui fait qu'on ajoute une valeur de taille de ponte (tp) √† la maturit√© et ca vaut zero pour ceux qui ont pas pondu/matur√©
 on a aussi 'eteint' tout ce qui concerne sex-ratio
 attention au denombrement des events par life-history: le fait de confondre maturite et 1ere ponte change les calculs du nbevents et nbponte
 
@@ -7,21 +7,21 @@ mais on a fait des modifs a integrer ds toutes les version lifeprob ulterieures
 -fonction erfra etait fausse, maintenant deux fonctions: erfrapos et erfra
 -bug ds metropolis (mars a appler avant le deuxieme uni
 - ajout des closefile un peu partout
-- espace enlevÈs pour bon alignement ds format de sortie en batch
+- espace enlev√©s pour bon alignement ds format de sortie en batch
 - ajout parametres ds les trade-off survie repro : dn et da  (respectivement effet taille de ponte et prametre d'amortissement du hazard de survie)
   ajoute fonction Sda
-  fonction censored_mort modifÈe pour appeler Sda plutot que Sd
-- nb parposs augmentÈ, donc f modifiÈ
+  fonction censored_mort modif√©e pour appeler Sda plutot que Sd
+- nb parposs augment√©, donc f modifi√©
 - survfunctype.vp [1..11] plutot que [1..5] car le nb param pour ponte augmente grave
-- ajout nom des param au debut ligne modele pour chacun ds fichier d'entrÈe
+- ajout nom des param au debut ligne modele pour chacun ds fichier d'entr√©e
 - nvele proc calculnbponte qu'on fait au debut avec calendrierbis pour obtenir une bonne fois pour toutes le nb de ponte de chaque hv
 - ajoute le numero de l'evenement ds l'hv pour mieux s'y retrouver
 
 LISTE BUGS COURANTs
- -  attention aux valeurs des variables continues initialisÈes ds le code, verifier les niv de facteur correspondant
+ -  attention aux valeurs des variables continues initialis√©es ds le code, verifier les niv de facteur correspondant
  - attention date de censure      !!!!!!!!!!!!!!!!!!!!
  - attention date critique initiale      !!!!!!!!!!!!!!!!!!!!
- - Les indices commencent ‡ 0 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ - Les indices commencent √† 0 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
  A FAIRE
  tx ponte pour lgnormal pour reparfitness           //FAIT
@@ -34,9 +34,11 @@ LISTE BUGS COURANTs
 
 unit Unit2;
 
+{$MODE Delphi}
+
 interface
 {$O+}
-uses alea, SysUtils,math, fspec,fmath,forms,grids;
+uses Alea, SysUtils,math, fspec,fmath,forms,grids;
 
 const
   theta = 2.5066282746310; { racine de 2Pi }
@@ -93,7 +95,7 @@ type
              typ:integer; //0:fact   1:continuous
              lev: integer;    //level  0...n  = factor, -1 continuous
              name:string;
-             valcont:array of double;     //valeurs si utilisÈe en var continues
+             valcont:array of double;     //valeurs si utilis√©e en var continues
              end;
   ind_info = record
              nb_hv,nb_cov: integer;
@@ -124,7 +126,7 @@ type
                 //ll:double;
                 use, nb_ind: integer;
                 //name: string;
-                matsanspon,mat, mort, ponte: survfunctype;            //quand matclutch = true 'mat' refere au temps de mat + 1ere ponet, ce n'est pas a proprement parlÈ 'mat', d'ou cette survfunctype matsanspon pour le calcul propre de la fitness ds ce cas
+                matsanspon,mat, mort, ponte: survfunctype;            //quand matclutch = true 'mat' refere au temps de mat + 1ere ponet, ce n'est pas a proprement parl√© 'mat', d'ou cette survfunctype matsanspon pour le calcul propre de la fitness ds ce cas
                 param: modeletypeinst; { numero des vi correspondante pour chaque param}
                 end;
   mat=array of array of double;
@@ -179,13 +181,13 @@ function getgroup(v:vecti):integer;      //obtiens le num du groupe a partir des
 begin
 Case nbcov of
 0: getgroup:=0;
-1: getgroup:=v[0];        //numero des groupes commence ‡ 0!!
+1: getgroup:=v[0];        //numero des groupes commence √† 0!!
 2: getgroup:=v[0]*(covar[2].lev)+v[1];
 3: getgroup:=v[0]*(covar[2].lev*covar[3].lev)+v[1]*(covar[3].lev)+v[2];
 end;
 end;
 
-{-------------attention procedure changÈe pour avoir l'ordre des interactions comme ds R-----------------
+{-------------attention procedure chang√©e pour avoir l'ordre des interactions comme ds R-----------------
 function getcov(group,covnum:integer):integer;                // renvoie la valeur du facteur correpondant a la covariable covnum pour le groupe numero 'group'
 var a,help:integer;
 begin
@@ -275,7 +277,7 @@ begin
 with group[a].gi[b].lh[0] do
   begin
   setlength(interv,nb_event);
-  for i := 0 to nb_event - 1 do if(events[0].t2=tinf) or (events[i].t2=tinf) then interv[i]:= 1 else interv[i]:= round((events[i].t2-events[i].t1)/intint) ;  {les hv ou mat est censurÈe: pas de decoupage (ni mat ni mort) et les morts censuree non decoupÈes aussi }
+  for i := 0 to nb_event - 1 do if(events[0].t2=tinf) or (events[i].t2=tinf) then interv[i]:= 1 else interv[i]:= round((events[i].t2-events[i].t1)/intint) ;  {les hv ou mat est censur√©e: pas de decoupage (ni mat ni mort) et les morts censuree non decoup√©es aussi }
   setlength(diviseur,nb_event);
   diviseur[nb_event - 1]:=1;
   for i := 0 to nb_event - 2 do  diviseur[nb_event - 2-i]:=  diviseur[nb_event - 1-i]*interv[nb_event - 1-i];
@@ -319,13 +321,13 @@ begin
  for i:= 0 to nb_group - 1 do
  for j := 0 to group[i].nb_ind - 1 do
  for k := 0 to group[i].gi[j].nb_hv - 1 do
-   if (group[i].gi[j].lh[k].events[1].t2<tinf) and (group[i].gi[j].lh[k].events[0].tp=0) then begin              //c'est une femelle qui a maturÈ
+   if (group[i].gi[j].lh[k].events[1].t2<tinf) and (group[i].gi[j].lh[k].events[0].tp=0) then begin              //c'est une femelle qui a matur√©
                                                   numevent:= group[i].gi[j].lh[k].nb_event+1;
                                                   group[i].gi[j].lh[k].nb_event:=numevent;
                                                   setlength(group[i].gi[j].lh[k].events,numevent)  ;            {on ajoute evenement non ponte si il y a eu maturite}
                                                   group[i].gi[j].lh[k].events[numevent-1].name:='nop';
                                                   group[i].gi[j].lh[k].events[numevent-1].t1:= group[i].gi[j].lh[k].events[numevent-2].t1      ;        {    nop.t1 = mort.t1  }
-                                                  group[i].gi[j].lh[k].events[numevent-1].t2:=tinf;     {on censure artificiellement l'evenement non ponte par definition}   //NB: si nop.t1 est negatif (quand mort et derniere ponte ds le meme intervale) alors c'est pas grave car les fonction surv sont protegÈe, ca donne une proba de 1 a l'evenement nop qui reflete l'absence d'info dans ce cas (on ne sait rien avec certitude: par exemple la mort peut intervenir au tout debut de l'intervale, ce qui correspondrait a un t1 de nonponte de zero)
+                                                  group[i].gi[j].lh[k].events[numevent-1].t2:=tinf;     {on censure artificiellement l'evenement non ponte par definition}   //NB: si nop.t1 est negatif (quand mort et derniere ponte ds le meme intervale) alors c'est pas grave car les fonction surv sont proteg√©e, ca donne une proba de 1 a l'evenement nop qui reflete l'absence d'info dans ce cas (on ne sait rien avec certitude: par exemple la mort peut intervenir au tout debut de l'intervale, ce qui correspondrait a un t1 de nonponte de zero)
                                                   end;
 end;
 
@@ -367,13 +369,13 @@ Begin
 End;
 
 { ************************************************************************ }
-function Incomplete_gamma_mathematica(a, b: double): double;                           //VerifiÈ c'est bien Gamma[a,b] mathematica
+function Incomplete_gamma_mathematica(a, b: double): double;                           //Verifi√© c'est bien Gamma[a,b] mathematica
 begin
   Incomplete_gamma_mathematica := JGamma(a, b) ;
 end;
 
 { ************************************************************************ }
-function gamma_regularized_mathematica(a, b: double): double;                          //VerifiÈ c'est bien GammaRegularized[a,b] mathematica
+function gamma_regularized_mathematica(a, b: double): double;                          //Verifi√© c'est bien GammaRegularized[a,b] mathematica
 begin
   gamma_regularized_mathematica := JGamma(a, b);
 end;
@@ -423,7 +425,7 @@ begin
       if x <= 0 then   surv := 1
       else  if (sex=1) and (vp[2]>0) then  paramaux:= (vp[0]*vp[2])/ vp[1]        // esperance gamma(a,b) = ab          b = 1/paramaux
                                      else  paramaux:= vp[0] / (vp[1]);
-      surv :=  gamma_regularized_mathematica(paramaux,x/vp[1]) ;    //surv = 1-CDF[Gamma[a,b],x] == 1-GammaRegularized[a,0,x/b] ==  GammaRegularized[a,x/b]   //CHECKÈ PENDANT 2 JOURS!!!!
+      surv :=  gamma_regularized_mathematica(paramaux,x/vp[1]) ;    //surv = 1-CDF[Gamma[a,b],x] == 1-GammaRegularized[a,0,x/b] ==  GammaRegularized[a,x/b]   //CHECK√© PENDANT 2 JOURS!!!!
     END;
 
   end; { du with }
@@ -449,14 +451,14 @@ function CalculRatioEspPoissonTronque( var ev: event_type; var pon: survfunctype
 var sum,tfrommat:double   ;
 begin
 if ev.name='pon' then  tfrommat:=  ev.fin-hv.events[1].fin else {si c'est 'mat'} tfrommat:=0  ;        // temps depuis la maturite qui est l'evenement [1]     vrai qqsoit matclutch si ev.name=pon sinon, si matcluth=true et ev.name='mat' compte senescence a partir de la mat=1ere ponte// Attention ca veut dire que senescence de taille de ponte ne veut pas dire exactement meme chose en matclutch true et false (false: senescence accumule depuis mat; true: senescence accumule depuis 1ere ponte(qui est aussi mat))
-sum:= tfrommat*(pon.vp[8]+pon.vp[9]*tfrommat) + pon.vp[10]*(ev.fin-ev.debut) ;  // intercept + senpent t + senpentt t2 + to(pupn) durÈeDernierintervaledeponte
+sum:= tfrommat*(pon.vp[8]+pon.vp[9]*tfrommat) + pon.vp[10]*(ev.fin-ev.debut) ;  // intercept + senpent t + senpentt t2 + to(pupn) dur√©eDernierintervaledeponte
 if sum>20 then CalculRatioEspPoissonTronque:=ratiomax
           else if sum<-20 then CalculRatioEspPoissonTronque:=minus
-                          else CalculRatioEspPoissonTronque :=  ratiomax / (1+Exp(xratiomax-sum))     ;   //ajustÈ pour valoir 1 quand sum=0: donc pas d'effet si vp8,vp9,vp10 sont nuls  //attention esp d'une loi de poisson tronquÈe ne peut pas etre <1     d'ou la condition sur espPoissontronque*ratio dans la procedure probevent
+                          else CalculRatioEspPoissonTronque :=  ratiomax / (1+Exp(xratiomax-sum))     ;   //ajust√© pour valoir 1 quand sum=0: donc pas d'effet si vp8,vp9,vp10 sont nuls  //attention esp d'une loi de poisson tronqu√©e ne peut pas etre <1     d'ou la condition sur espPoissontronque*ratio dans la procedure probevent
 end;
 
 { ************************************************************************* }
-function Survtotpon(tfromlastpon,tfrommat:double; var su: survfunctype; var lh:life_history;sex:integer ): double;         //fonction qui corrige S(t) en ajoutant un increment /decrement de hazard pour senescence du taux de ponte. attention le temps en argument est le temps depuis maturitÈ!!
+function Survtotpon(tfromlastpon,tfrommat:double; var su: survfunctype; var lh:life_history;sex:integer ): double;         //fonction qui corrige S(t) en ajoutant un increment /decrement de hazard pour senescence du taux de ponte. attention le temps en argument est le temps depuis maturit√©!!
 var i:integer;
     vp0,vp6,vp7: double;
 
@@ -482,7 +484,7 @@ else Survtotpon :=   surv(tfromlastpon,su,sex);
 ENd;
 
 { ************************************************************************* }
-function Sda(t,d,da,dn:double; var lh:life_history;sex:integer): double;         //fonction qui corrige S(t) en ajoutant le hazard cumulÈ du fait d'un trade off survie repro : la bonne fonction de survie devient le produit S(t) Sda(t,d,lh). Mais ici le l'increment de hazard a chaque ponte (d+dn*taille ponte) est amorti exponentiellement au taux da.
+function Sda(t,d,da,dn:double; var lh:life_history;sex:integer): double;         //fonction qui corrige S(t) en ajoutant le hazard cumul√© du fait d'un trade off survie repro : la bonne fonction de survie devient le produit S(t) Sda(t,d,lh). Mais ici le l'increment de hazard a chaque ponte (d+dn*taille ponte) est amorti exponentiellement au taux da.
 var i,aux:integer;
     sumhaz,ttodeath: double;
 BEgin
@@ -493,21 +495,21 @@ if lh.nbponte=0 then Sda:=1  //pas de ponte     // les males n'ont pas de ponte 
                    for i:=1 to lh.nbponte do
                         begin
                         ttodeath:= (t-lh.events[i+aux].fin);  //aux = 1 :commence a la premiere  ponte dont l'indice est event[2]    //aux = 0 : commence a la maturite qui est une ponte et dont l'indice est event[1]
-                        if ttodeath<0 then ttodeath:=0;     //WARNING dire qu'il y a un pb ds les donnÈes    //mort est le dernier evenement comme ca devrait, sauf erreur ds les donnÈes
+                        if ttodeath<0 then ttodeath:=0;     //WARNING dire qu'il y a un pb ds les donn√©es    //mort est le dernier evenement comme ca devrait, sauf erreur ds les donn√©es
                         if (da*ttodeath >11)
                         then sumhaz:=sumhaz+(d+dn*lh.events[i+aux].tp)/da  //le terme Exp est nul  l'integrale vaut d/da
                         else if (da*ttodeath < 0.0001)
                              then sumhaz:=sumhaz+(d+dn*lh.events[i+aux].tp) *ttodeath //l'amortissement est presque nul, l'intgrale vaut d * t
                              else sumhaz:=sumhaz+(d+dn*lh.events[i+aux].tp)*(1-Exp(-da*ttodeath))/da;   //l'integrale vaut d(1-exp(-da t))/da
                         end;
-                   Sda:= Exp(-sumhaz)          //S(t) = Exp(-somme hazard cumulÈ)
+                   Sda:= Exp(-sumhaz)          //S(t) = Exp(-somme hazard cumul√©)
                    end;
 ENd;
 
 { ************************************************************************* }
 function censored_mort( t1, t2: double; var su: survfunctype; sex:integer; var hv:life_history;d,da,dn:double): double;
 begin
-if (su.vp[3]>0)  then                     //i.e. if mortp est utilisÈ
+if (su.vp[3]>0)  then                     //i.e. if mortp est utilis√©
   BEGIN
   if (t2 < tc) then
                censored_mort := 1 - su.vp[3] * surv(tc, su, sex) * Sda(tc,d,da,dn,hv,sex)
@@ -531,7 +533,7 @@ var
   P,mu: double;
   I: integer;
 Begin
-//  on veut retrouver l'esperance de la loi de poisson (mu) qui sert a generer la tronquÈe ‡ partir de l'esp de la tronquÈe (esp)
+//  on veut retrouver l'esperance de la loi de poisson (mu) qui sert a generer la tronqu√©e √† partir de l'esp de la tronqu√©e (esp)
 // on sait que esp = mu/(1-Exp(-mu))
 // on fait l'approx mu = esp-Exp(-(esp-1)) qui n'est pas triviale mais qui marche bien
 //ATTENTION esp est forcement >= 1
@@ -562,11 +564,11 @@ begin                                                                           
    with legroupe do
    begin
    if ponte.vp[0]<=0 then fx:=0
-                   else if matclutch=0 then fx:= (*0.5*)( (1-surv(t,mat,0))*survp(t,mort,0) (*+ (1-surv(t,mat,1))*survp(t,mort,1)*) )    *Expo(-r*t) * (1/ponte.vp[0] )     //vp[0] est l'esperance du temps de ponte qqsoit la loi (exp, wei, lgn, gam), donc 1 sur cette esperance est le taux instatanÈ de ponte  //le reste (survie, maturite) moyenne male/fem
+                   else if matclutch=0 then fx:= (*0.5*)( (1-surv(t,mat,0))*survp(t,mort,0) (*+ (1-surv(t,mat,1))*survp(t,mort,1)*) )    *Expo(-r*t) * (1/ponte.vp[0] )     //vp[0] est l'esperance du temps de ponte qqsoit la loi (exp, wei, lgn, gam), donc 1 sur cette esperance est le taux instatan√© de ponte  //le reste (survie, maturite) moyenne male/fem
                                            else fx:= (*0.5*)( (1-surv(t,mat(*sanspon*),0))*survp(t,mort,0) (*+ (1-surv(t,mat,1))*survp(t,mort,1)*) )    *Expo(-r*t) * (1/ponte.vp[0] )    ;
 
 
-   // fitness:=romb(fitnessinst,0,?,0.001) probleme de passer arguments variÈs de fitnessinst ds romb
+   // fitness:=romb(fitnessinst,0,?,0.001) probleme de passer arguments vari√©s de fitnessinst ds romb
    end;
 end;
 
@@ -661,7 +663,7 @@ begin                                          { 0 ,  1 ,  ...,  nbevent-2, nbev
     if hv.events[I].name='nop' then hv.events[I].debut:=hv.events[I - 2].fin;    { le derniere ponte est l'evenement I-2, au pire la maturite}
     end;
  //nb: les debut sont utiles pour les pontes maturite et nop
- //fins sont foireux pour tous les evenements censurÈs ou t2 = tinf, mais prete pas a consequences
+ //fins sont foireux pour tous les evenements censur√©s ou t2 = tinf, mais prete pas a consequences
  //
 end;
 
@@ -669,7 +671,7 @@ end;
 procedure calculnbponte(var hv:life_history);
 begin
 if matclutch=1 then      //mode daphnie : la maturite est  une ponte
-    if hv.events[1].tp=0 then hv.nbponte:=0 else hv.nbponte:=1+hv.nb_event-4;   //attention modifiÈ pour daphnie ou mat=1ere ponte  et compte ds nbponte
+    if hv.events[1].tp=0 then hv.nbponte:=0 else hv.nbponte:=1+hv.nb_event-4;   //attention modifi√© pour daphnie ou mat=1ere ponte  et compte ds nbponte
 if matclutch=0 then     //mode artemie : la maturite n'est pas une ponte
     hv.nbponte := round(max(hv.nb_event-4,0));
 end;
@@ -716,8 +718,8 @@ begin
                        begin
                        if fitness_repar=1 then esptailleponte:= pon.vp[2]*CalculRatioEspPoissonTronque(ev, pon, hv)/integrale else esptailleponte:= pon.vp[2]*CalculRatioEspPoissonTronque(ev, pon, hv);
                        if esptailleponte<1 then  esptailleponte:=1+minus;  // attention du fait du ratio cette esperance pourrait se retrouver <1 et ce n'est pas possible mathematiquement
-                       probevent := (survtotpon(ev.t1-ev.debut, ev.t1-hv.events[1].fin , pon,hv,sex) - survtotpon(ev.t2-ev.debut, ev.t1-hv.events[1].fin ,pon,hv,sex) )  * ppoissontrunc(esptailleponte, ev.tp) + minus;       //(Stot(t1) - Stot(t2))prob(taille ponte/integrale) attention pon.vp[2] n'est pas a proprement parler la moyenne de la loi de poisson tronquÈe qui vaut en fait vp3/(1-Exp(-vp3)): il faut reecrire la function poissontrunc pour que son parametre corresponde a son esperance directement
-                       end;                                                                                         //attention tfrommat calculÈ depuis ev.t1 car l'effet de snescence est pris en compte au debut de l'intervale
+                       probevent := (survtotpon(ev.t1-ev.debut, ev.t1-hv.events[1].fin , pon,hv,sex) - survtotpon(ev.t2-ev.debut, ev.t1-hv.events[1].fin ,pon,hv,sex) )  * ppoissontrunc(esptailleponte, ev.tp) + minus;       //(Stot(t1) - Stot(t2))prob(taille ponte/integrale) attention pon.vp[2] n'est pas a proprement parler la moyenne de la loi de poisson tronqu√©e qui vaut en fait vp3/(1-Exp(-vp3)): il faut reecrire la function poissontrunc pour que son parametre corresponde a son esperance directement
+                       end;                                                                                         //attention tfrommat calcul√© depuis ev.t1 car l'effet de snescence est pris en compte au debut de l'intervale
 
 //append(outfile);
 //writeln(outfile, ev.name,' ',floattostrf(ev.t1, fffixed, 20,13),' ',floattostrf(ev.t2, fffixed, 20,13),' ', floattostrf(ln(result), fffixed, 20,13));
@@ -734,9 +736,9 @@ if name='exp' then getvar:=vp[0]*vp[0];   //var d'une exp est moy^2
 if name='wei' then begin                                                                                        //NOTATIONS MATHEMATICA!!
                       aux1:=Gamma(1+1/vp[1]);
                       aux2:=Gamma(1+2/vp[1]);
-                      getvar:=vp[0]*vp[0] * (aux2-aux1*aux1)/(aux1*aux1)  ;          //Weibull[vp1,vp0/Gamma(1+1/vp1)]   ca donne une esperance de vp0 et la variance est compliquÈe mais donnÈe par getvar
+                      getvar:=vp[0]*vp[0] * (aux2-aux1*aux1)/(aux1*aux1)  ;          //Weibull[vp1,vp0/Gamma(1+1/vp1)]   ca donne une esperance de vp0 et la variance est compliqu√©e mais donn√©e par getvar
                       end;
-if name='lgn' then getvar:=vp[0]*vp[0] * (Expo(vp[1]*vp[1])-1);             //LogNormale[0.5*(2Log[vp0]-vp1≤) , vp1 ]  ca donne une esperane de vpO et la variance egale ‡   vp0≤(Exp(vp1≤)-1)
+if name='lgn' then getvar:=vp[0]*vp[0] * (Expo(vp[1]*vp[1])-1);             //LogNormale[0.5*(2Log[vp0]-vp1¬≤) , vp1 ]  ca donne une esperane de vpO et la variance egale √†   vp0¬≤(Exp(vp1¬≤)-1)
 if name='gam' then getvar:=vp[0]*vp[1] ;      // Gamma[vp0/vp1,vp1]  ca donne une moyenne qui est vp0 et une variance vp0 vp1
 end;
 end;
@@ -1426,7 +1428,7 @@ if fitness_repar=1
 
   with FD.paramdescript[11] do
       begin
-        name := 'to(ps)int';            //tradeoff ponte -> surv intercept (evenement ponte augmente le hazard de survie de cette quantitÈ)
+        name := 'to(ps)int';            //tradeoff ponte -> surv intercept (evenement ponte augmente le hazard de survie de cette quantit√©)
         minBound := 0.00001;
         maxBound := 10;
      //   value := 0.5;
@@ -1440,7 +1442,7 @@ if fitness_repar=1
      //   value := 0.5;
       end;
 
-  with FD.paramdescript[13] do          //tradeoff ponte -> surv , augmentation du tradeoff en fonction linÈaire de la taille ponte en question
+  with FD.paramdescript[13] do          //tradeoff ponte -> surv , augmentation du tradeoff en fonction lin√©aire de la taille ponte en question
       begin
         name := 'to(ps)tp';
         minBound := 0.0000001;
@@ -1450,13 +1452,13 @@ if fitness_repar=1
 
   with FD.paramdescript[14] do
       begin
-        name := 'sen(pu)t';             //senescence de hazard ponte, effet lineaire du temps post-maturitÈ
+        name := 'sen(pu)t';             //senescence de hazard ponte, effet lineaire du temps post-maturit√©
         minBound := -20;
         maxBound := 20;
      //   value := 0.5;
       end;
 
-  with FD.paramdescript[15] do          //senescence de hazard ponte, effet quadratique du temps post-maturitÈ
+  with FD.paramdescript[15] do          //senescence de hazard ponte, effet quadratique du temps post-maturit√©
       begin
         name := 'sen(pu)t2';
         minBound := -20;
@@ -1464,7 +1466,7 @@ if fitness_repar=1
      //   value := 0.5;
       end;
 
-  with FD.paramdescript[16] do        //senescence de taille ponte, effet linÈaire du temps post-maturitÈ
+  with FD.paramdescript[16] do        //senescence de taille ponte, effet lin√©aire du temps post-maturit√©
       begin
         name := 'sen(pn)t';
         minBound := -10;
@@ -1472,7 +1474,7 @@ if fitness_repar=1
      //   value := 0.5;
       end;
 
-  with FD.paramdescript[17] do       //senescence de taille ponte, effet quadratique du temps post-maturitÈ
+  with FD.paramdescript[17] do       //senescence de taille ponte, effet quadratique du temps post-maturit√©
       begin
         name := 'sen(pn)t2';
         minBound := -10;
@@ -1586,8 +1588,8 @@ for i := 0 to nbparposs-1 do
 
        if (modele[i].term[j]>10) then                    //determine the termcov
             BEGIN
-            modele[i].termcov0[j]:=modele[i].term[j] mod 10;                                    //ligne changÈe termcov0 initialement
-            modele[i].termcov1[j]:=modele[i].term[j] div 10 ;                                   //ligne changÈe termcov1 initialement
+            modele[i].termcov0[j]:=modele[i].term[j] mod 10;                                    //ligne chang√©e termcov0 initialement
+            modele[i].termcov1[j]:=modele[i].term[j] div 10 ;                                   //ligne chang√©e termcov1 initialement
             modele[i].firstvi[j]:=count+1 ;
             if (covar[modele[i].termcov0[j]].typ+covar[modele[i].termcov1[j]].typ=0) then
                                //facteur x facteur
@@ -1653,7 +1655,7 @@ for i := 0 to nb_group - 1 do with group[i] do
         if (modele[j].term[k]>0) and (modele[j].term[k]<10) then                    //determine the termcov
                                   if covar[modele[j].termcov0[k]].typ=0
                                   then begin
-                                       if getcov(i,modele[j].termcov0[k])=0    //le premier niveau indicÈ 0 est fittÈ deja ds l'intercept, il ne faut pas l'ajouter
+                                       if getcov(i,modele[j].termcov0[k])=0    //le premier niveau indic√© 0 est fitt√© deja ds l'intercept, il ne faut pas l'ajouter
                                        then group[i].param[j].po[k]:=-1
                                        else  group[i].param[j].po[k]:= modele[j].firstvi[k]  + getcov(i,modele[j].termcov0[k])-1  ;
                                        end
@@ -1674,7 +1676,7 @@ for i := 0 to nb_group - 1 do with group[i] do
                                     then if getcov(i,modele[j].termcov1[k])=0
                                          then group[i].param[j].po[k]:=-1
                                          else begin
-                                              group[i].param[j].po[k]:=modele[j].firstvi[k]+getcov(i,modele[j].termcov1[k]-1);  //le firstvi est le count+1, il faut donc firstvi+getcov-1   ; le getcov renvoie les valeurs 0 ‡ level-1. Le cas zero est exclu d'entrÈe, les po commence a firstvi + getcov-1
+                                              group[i].param[j].po[k]:=modele[j].firstvi[k]+getcov(i,modele[j].termcov1[k]-1);  //le firstvi est le count+1, il faut donc firstvi+getcov-1   ; le getcov renvoie les valeurs 0 √† level-1. Le cas zero est exclu d'entr√©e, les po commence a firstvi + getcov-1
                                               group[i].param[j].valpo[k]:=covar[modele[j].termcov0[k]].valcont[getcov(i,modele[j].termcov0[k])];
                                               end;
                                     //facteur x continu
@@ -1682,7 +1684,7 @@ for i := 0 to nb_group - 1 do with group[i] do
                                     then if getcov(i,modele[j].termcov0[k])=0
                                          then group[i].param[j].po[k]:=-1
                                          else begin
-                                              group[i].param[j].po[k]:=modele[j].firstvi[k]+getcov(i,modele[j].termcov0[k]-1);  //le firstvi est le count+1, il faut donc firstvi+getcov-1   ; le getcov renvoie les valeurs 0 ‡ level-1. Le cas zero est exclu d'entrÈe, les po commence a firstvi + getcov-1
+                                              group[i].param[j].po[k]:=modele[j].firstvi[k]+getcov(i,modele[j].termcov0[k]-1);  //le firstvi est le count+1, il faut donc firstvi+getcov-1   ; le getcov renvoie les valeurs 0 √† level-1. Le cas zero est exclu d'entr√©e, les po commence a firstvi + getcov-1
                                               group[i].param[j].valpo[k]:=covar[modele[j].termcov1[k]].valcont[getcov(i,modele[j].termcov1[k])];
                                               end;
                                     //continu x continu

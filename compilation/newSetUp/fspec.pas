@@ -33,6 +33,8 @@
 
 unit fspec;
 
+{$MODE Delphi}
+
 interface
 
 uses
