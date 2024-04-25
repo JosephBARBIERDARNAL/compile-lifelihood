@@ -18,6 +18,12 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 
 ## History
 
+### April 25
+
+
+
+<br>
+
 ### April 23
 
 - Project seems to not be compiled correctly because executable files don't do much, so I re start from a clean base. 
@@ -42,6 +48,7 @@ Documentation of the process of compiling the Lifelihood project on macOS.
 
 - Since the problem seems related to the LLBD debugger, I tried to use GDB, but `brew install gdb` tells me that GDB does not work on M1 macs (which is also my case).
 
+<br>
 
 ### April 15
 
@@ -56,8 +63,6 @@ begin
 end. 
 ```
 
-<br>
-
 - ✅ Created a simple project in Lazarus and compiled a simple program that prints "Hello, World!" to the console. The code is as follows:
 ```pascal
 program HelloWorld;
@@ -69,8 +74,6 @@ begin
 end. 
 ```
 Once compiled, I ran the program with `./project1` and it worked as expected.
-
-<br>
 
 - ✅ Create a project in Lazarus and tried to compile the whole `Lifelihood` project. The project is not compiling because of the following error:
 ```
@@ -113,11 +116,7 @@ So I change `procedure roughgarden(var a,b:integer)` to `procedure roughgarden(a
 
 ### April 8
 
-<br>
-
 - 👎 Tried to use the [wine](https://www.winehq.org/) software for running `.exe` files directly on macOS, but does not seem to be solution to the problem. We rather need a compiler from source code directly.
-
-<br>
 
 - ✅ Followed tutorial from [this page](https://wiki.lazarus.freepascal.org/Installing_Lazarus_on_macOS) that explains how to install Lazarus on macOS (using [this page](https://sourceforge.net/projects/lazarus/)). Lazarus is a free cross-platform IDE which provides a Delphi-like development experience for Pascal. Main steps:
 ```
@@ -131,7 +130,5 @@ So I change `procedure roughgarden(var a,b:integer)` to `procedure roughgarden(a
 
 - Configure LLDB - the Apple supplied (and signed) debugger from within the Lazarus IDE.
 ```
-
-<br>
 
 - TODO next session: try to compile some code with Lazarus and see if it works.
