@@ -3,6 +3,11 @@
   <ProjectOptions>
     <Version Value="12"/>
     <General>
+      <Flags>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
+        <MainUnitHasScaledStatement Value="False"/>
+      </Flags>
       <SessionStorage Value="InProjectDir"/>
       <Title Value="lifelihoodC2023"/>
       <UseAppBundle Value="False"/>
@@ -57,13 +62,17 @@
   <CompilerOptions>
     <Version Value="11"/>
     <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
-        <SyntaxMode Value="delphi"/>
+        <SyntaxMode Value="Delphi"/>
       </SyntaxOptions>
     </Parsing>
+    <CodeGeneration>
+      <TargetOS Value="macos"/>
+    </CodeGeneration>
     <Linking>
       <Debugging>
         <DebugInfoType Value="dsDwarf3"/>

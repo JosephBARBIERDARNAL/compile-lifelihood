@@ -1,7 +1,7 @@
 
 rm(list = ls())
-infile = "../data/100%mort_Pierrick211genoparinteraction.txt"
-customfile = "../data/custom.txt"
+infile = "data/testdata.txt"
+customfile = "data/custom.txt"
 GbyG = 0
 MCMC = 0
 interval = 25
@@ -26,13 +26,12 @@ arg_string <- paste(infile, customfile, GbyG, MCMC, interval, SEcal,
                     seed4, ntr, nst, To, Tf, climbrate, precision, sep = " ")
 
 # define the path to the executable
-app_path <- "compilation/setUp/lib/x86_64-darwin/lifelihoodC2023"
-command <- paste(app_path, arg_string, sep=" ")
-print(command)
+command <- "compilation/setUp/lib/x86_64-darwin/lifelihoodC2023"
 
 # run the command
 system(
     command,
+    input = arg_string,  # pass the arguments to the command
     intern = FALSE, # capture the output
-    wait = FALSE  # don't wait for the command to finish
+    wait = TRUE, # wait for the command to finish
 )

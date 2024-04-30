@@ -873,17 +873,22 @@ begin
       beta := (temp0 - tempf) / (ntr * temp0 * tempf);
     temp := temp0;
     pacc := 0;
+    writeln('pepito');
   end;
   { ******************************************** }
   with fun_des do { set up function variables }
   begin
+    writeln('weekend');
     CurrResult := f(fun_des);
+    writeln('github');
     if CurrResult > BestResult then
     begin
       BestResult := CurrResult;
+      writeln('greenlab');
       for j := 1 to number_of_variables do
         with var_info[j] do
           Bestvalue := value;
+          writeln('chocapic');
     end;
   end;
   { ***************************************** }
@@ -1002,11 +1007,14 @@ var
   I, k, t, batchsize, rep: integer;
 
 begin
+  writeln('1');
   t := 0;
   repeat { recherche globale }
     t := t + 1;
     { searching }
+    writeln('2');
     Metropolise(function_des, Metrop_des);
+    writeln('3');
     { updating }
     with Metrop_des do
       with function_des do

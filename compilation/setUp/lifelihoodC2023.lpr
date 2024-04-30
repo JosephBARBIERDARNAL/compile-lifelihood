@@ -30,7 +30,6 @@ TRY
 
   //infile
   nomf1:=list[0];
-  writeln(nomf1);
   assignfile(f1,nomf1);     // f1 declaré ds unit2
   readata;
   fitness_repar:=StrToInt(list[7]);
@@ -64,16 +63,20 @@ TRY
   Init_met_D(The_Met_D);
   interpretation(fitness_repar);      //anciennement readgrid
   Init_f_D( LL_D);
+  write('test ');
   automatic_met(LL_D, The_Met_D);
 
   //MCMC
+  writeln('hello0');
   if StrToInt(list[3])>0 then begin
                               nbsample:=StrToInt(list[3]);
                               intervalsamples:=StrToInt(list[4]);          // interval between each sample
                               promenade(LL_D, The_Met_D);   // a verifier
                               end;
   //standard errors
+  writeln('hello1 ');
   if list[5]='true' then calcSE(LL_D);
+  writeln('hello2 ');
 
   //ecriture outfile
    printout_FD(LL_D,nomf1,StrToInt(list[3]));           // OK passer en argument de printout le nb de point de mcmc

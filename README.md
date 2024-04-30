@@ -151,3 +151,31 @@ So I change `procedure roughgarden(var a,b:integer)` to `procedure roughgarden(a
 
 - ✅ **Compiling and Execute on Windows with Embarcadero**. Using Embarcadero, I created a console project, added the source files to it and compile it again. The project compiled without any errors. Then I ran the executable file with some data and it worked as expected.
 
+- ✅ **Compiling and Execute on Windows with Lazarus**. I first converted the Delphi project into a Lazarus project using the built-in tool in Lazarus. However, when I try to compile it leads to the same error I was facing in [April 15](#april-15): 
+   ```
+   Unit1.pas(189,46) Error: Illegal assignment to for loop variable "j"
+   ```
+   - I tried to change the `roughgarden` function to `procedure roughgarden(a,b:integer)` instead of `procedure roughgarden(var a,b:integer)` and it seems to solve the problem (parameters passed by value instead of by reference).
+   - Then I got new errors:
+   ```
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterCustomImageListResolution
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterMenuItem
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterMenu
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterMainMenu
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterPopupMenu
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterDragImageListResolution
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterLazAccessibleObject
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterControl
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterWinControl
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterGraphicControl
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterCustomControl
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterScrollingWinControl
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterScrollBox
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterCustomFrame
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterCustomForm
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterHintWindow
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterCustomScrollBar
+   lifelihoodC2023.lpr(88,1) Error: Undefined symbol: WSRegisterCustomGroupBox
+   ```
+   I believe that this error is the Windows equivalent of the error I was facing on macOS. As originally suggested by the administrator of the Lazarus forum, I basically add the `Interfaces` unit to the `uses` clause of the main (.lpr) file, and it seems to solve the problem. The project compiles without any errors.
+
