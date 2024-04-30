@@ -26,8 +26,8 @@ arg_string <- paste(infile, customfile, GbyG, MCMC, interval, SEcal,
                     seed4, ntr, nst, To, Tf, climbrate, precision, sep = " ")
 
 # define the path to the executable
-app_path <- "compilation/newSetUp/lib/x86_64-darwin/lifelihoodC2023"
-command <- paste("open", app_path, "--args", arg_string)
+app_path <- "compilation/setUp/lib/x86_64-darwin/lifelihoodC2023"
+command <- paste(app_path, arg_string, sep=" ")
 print(command)
 
 # run the command
