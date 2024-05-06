@@ -254,8 +254,8 @@ with FD.paramdescript[i] do
 
 if fitness_repar=1 then
 begin
-  writeln('Before with block');
-  with FD.paramdescript[10] do        //pontn is le 11th param in custom.txt
+  writeln('This does not print');
+  with FD.paramdescript[10] do        //pontn est le 11 param ds custom.txt
   begin
     writeln('Inside with block');
     readln(fc, check);
