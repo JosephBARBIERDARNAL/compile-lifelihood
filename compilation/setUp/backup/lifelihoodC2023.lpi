@@ -67,12 +67,9 @@
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
-        <SyntaxMode Value="Delphi"/>
+        <SyntaxMode Value="fpc"/>
       </SyntaxOptions>
     </Parsing>
-    <CodeGeneration>
-      <TargetOS Value="macos"/>
-    </CodeGeneration>
     <Linking>
       <Debugging>
         <DebugInfoType Value="dsDwarf3"/>

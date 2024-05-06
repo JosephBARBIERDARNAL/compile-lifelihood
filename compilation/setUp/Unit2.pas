@@ -873,22 +873,18 @@ begin
       beta := (temp0 - tempf) / (ntr * temp0 * tempf);
     temp := temp0;
     pacc := 0;
-    writeln('pepito');
   end;
   { ******************************************** }
   with fun_des do { set up function variables }
   begin
-    writeln('weekend');
+    writeln('here');
     CurrResult := f(fun_des);
-    writeln('github');
     if CurrResult > BestResult then
     begin
       BestResult := CurrResult;
-      writeln('greenlab');
       for j := 1 to number_of_variables do
         with var_info[j] do
           Bestvalue := value;
-          writeln('chocapic');
     end;
   end;
   { ***************************************** }

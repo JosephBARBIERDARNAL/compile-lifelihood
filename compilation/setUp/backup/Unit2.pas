@@ -878,6 +878,7 @@ begin
   { ******************************************** }
   with fun_des do { set up function variables }
   begin
+    writeln('weekend');
     CurrResult := f(fun_des);
     writeln('github');
     if CurrResult > BestResult then

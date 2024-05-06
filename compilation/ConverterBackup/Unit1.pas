@@ -73,7 +73,7 @@ if lal[0]='none' then nbcov:=0 else
           begin
           covar[j+1].lev:=strtoint(lal[j-lal.count]) ;   //lev des cont
           covar[j+1].typ:=1;                               //typ cont
-          setlength(covar[j+1].valcont,covar[j+1].lev);     // les valcont initialisés
+          setlength(covar[j+1].valcont,covar[j+1].lev);     // les valcont initialisï¿½s
           end;
   end;
 
@@ -184,7 +184,7 @@ while not eof(f1) do
 // Generer les non-pontes
 Gnop;
 
-// Gerer les juveniles non sexés
+// Gerer les juveniles non sexï¿½s
 for i:= 0 to nb_group - 1 do  for j := 0 to group[i].nb_ind - 1 do
  if group[i].gi[j].lh[0].events[0].tp=2 then roughgarden(i,j)  ;
 
@@ -210,13 +210,13 @@ var lal:TStringList;
 begin
 setlength(suaux.vp,11);
 //  1    morta            !!! faire distingo entre weibull et ln
-//  11   'to(ps)int';    tradeoff ponte -> surv intercept (evenement ponte augmente le hazard de survie de cette quantité)
+//  11   'to(ps)int';    tradeoff ponte -> surv intercept (evenement ponte augmente le hazard de survie de cette quantitï¿½)
 //  12    'to(ps)am'     tradeoff ponte -> surv amortissement du precedent avec le temps
-//  13    'to(ps)tp'     tradeoff ponte -> surv , augmentation du tradeoff en fonction linéaire de la taille ponte en question
-//  14     'sen(pu)t'    senescence de hazard ponte, effet lineaire du temps post-maturité
-// 15     'sen(pu)t2'    senescence de hazard ponte, effet quadratique du temps post-maturité
-// 16     sen(pn)t       senescence de taille ponte, effet linéaire du temps post-maturité
-// 17     sen(pn)t2      senescence de taille ponte, effet quadratique du temps post-maturité
+//  13    'to(ps)tp'     tradeoff ponte -> surv , augmentation du tradeoff en fonction linï¿½aire de la taille ponte en question
+//  14     'sen(pu)t'    senescence de hazard ponte, effet lineaire du temps post-maturitï¿½
+// 15     'sen(pu)t2'    senescence de hazard ponte, effet quadratique du temps post-maturitï¿½
+// 16     sen(pn)t       senescence de taille ponte, effet linï¿½aire du temps post-maturitï¿½
+// 17     sen(pn)t2      senescence de taille ponte, effet quadratique du temps post-maturitï¿½
 // 18     to(pupn)       tradeoff intervale ponte i-1 qui change taille ponte i
 
 reset(fc);

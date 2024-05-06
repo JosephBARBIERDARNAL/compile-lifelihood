@@ -64,7 +64,6 @@ TRY
   interpretation(fitness_repar);      //anciennement readgrid
   Init_f_D( LL_D);
   write('test ');
-  writeln(LL_D);
   automatic_met(LL_D, The_Met_D);
 
   //MCMC

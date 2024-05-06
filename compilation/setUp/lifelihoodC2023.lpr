@@ -63,18 +63,15 @@ TRY
   Init_met_D(The_Met_D);
   interpretation(fitness_repar);      //anciennement readgrid
   Init_f_D( LL_D);
-  write('test ');
   automatic_met(LL_D, The_Met_D);
 
   //MCMC
-  writeln('hello0');
   if StrToInt(list[3])>0 then begin
                               nbsample:=StrToInt(list[3]);
                               intervalsamples:=StrToInt(list[4]);          // interval between each sample
                               promenade(LL_D, The_Met_D);   // a verifier
                               end;
   //standard errors
-  writeln('hello1 ');
   if list[5]='true' then calcSE(LL_D);
   writeln('hello2 ');
 

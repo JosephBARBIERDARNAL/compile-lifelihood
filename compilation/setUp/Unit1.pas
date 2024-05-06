@@ -233,17 +233,23 @@ with FD.paramdescript[i] do
         name := lal[0];
         minBound :=StrToFloat(lal[1]);
         maxBound :=StrToFloat(lal[2]);
+        writeln('This actually prints');
         end;
 
-if fitness_repar=1
-  then  with FD.paramdescript[10] do        //pontn est le 11 param ds custom.txt
-        begin
-        readln(fc,check );
-        lal.DelimitedText:=check;
-        name := lal[0];
-        minBound :=StrToFloat(lal[1]);
-        maxBound :=StrToFloat(lal[2]);
-        end;
+if fitness_repar=1 then
+begin
+  writeln('Before with block');
+  with FD.paramdescript[10] do        //pontn est le 11 param ds custom.txt
+  begin
+    writeln('Inside with block');
+    readln(fc, check);
+    lal.DelimitedText := check;
+    name := lal[0];
+    minBound := StrToFloat(lal[1]);
+    maxBound := StrToFloat(lal[2]);
+    writeln('After reading');
+  end;
+end;
 lal.free;
 closefile(fc);
 end;

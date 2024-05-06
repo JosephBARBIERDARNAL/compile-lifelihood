@@ -179,3 +179,91 @@ So I change `procedure roughgarden(var a,b:integer)` to `procedure roughgarden(a
    ```
    I believe that this error is the Windows equivalent of the error I was facing on macOS. As originally suggested by the administrator of the Lazarus forum, I basically add the `Interfaces` unit to the `uses` clause of the main (.lpr) file, and it seems to solve the problem. The project compiles without any errors.
 
+- ❌ **Compiling and Execute on macOS with Lazarus**. Dit not work.
+   - I converted the Delphi project into a Lazarus project and tried to compile it on macOS. The project compiles without a single error `Error: -macosx_version_min has been renamed to -macos_version_min`, but it does not break the compilation process. However, when I try to run the executable file, it does not work. The R console (see root/R/lifehood_mac.R) returns the following error:
+   ```R
+   > system(
+   +     command,
+   +     input = arg_string,
+   +     intern = FALSE,
+   +     wait = TRUE,
+   + )
+   EAccessViolation: Access violation
+   ```
+
+
+<br>
+
+### May 6
+
+- The execution error comes from the `Metropolise` procedure (`Unit2.pas`) right after the `writeln('here');` line:
+
+```pascal
+procedure Metropolise(var fun_des: function_D; var Met_des: Metropolis_D);
+
+var
+  df, newfresult, sm, ssq, nATT, t, savedvalue: double;
+  beta, temp: double; { cooling rate }
+  acc: boolean;
+  m, I, j: integer;
+begin
+  { ****************************************** }
+  with Met_des do { set up cooling rates: beta, temp }
+  begin
+    if (temp0 = 0) and (tempf = 0) then
+      beta := 0
+    else { beware of setting temp0 or temp f to zero }
+    if (temp0 > 0) and (tempf > 0) then
+      beta := (temp0 - tempf) / (ntr * temp0 * tempf);
+    temp := temp0;
+    pacc := 0;
+  end;
+  { ******************************************** }
+  with fun_des do { set up function variables }
+  begin
+    writeln('here');
+    CurrResult := f(fun_des);
+    if CurrResult > BestResult then
+    begin
+      BestResult := CurrResult;
+      for j := 1 to number_of_variables do
+        with var_info[j] do
+          Bestvalue := value;
+    end;
+  end;
+   { ******************************************** }
+
+   code continues...
+```
+
+I'm not sure to understand what `f(fun_des)` does.
+
+I also added some print statement in `Unit1.pas`, and error should be somewhere near them:
+
+```pascal
+For i:=0 to nbparposs-1 do
+with FD.paramdescript[i] do
+        begin
+        readln(fc,check );
+        lal.DelimitedText:=check;
+        name := lal[0];
+        minBound :=StrToFloat(lal[1]);
+        maxBound :=StrToFloat(lal[2]);
+        writeln('This actually prints');
+        end;
+
+if fitness_repar=1 then
+begin
+  writeln('Before with block');
+  with FD.paramdescript[10] do        //pontn is le 11th param in custom.txt
+  begin
+    writeln('Inside with block');
+    readln(fc, check);
+    lal.DelimitedText := check;
+    name := lal[0];
+    minBound := StrToFloat(lal[1]);
+    maxBound := StrToFloat(lal[2]);
+    writeln('After reading');
+  end;
+end;
+```
